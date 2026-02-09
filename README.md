@@ -41,41 +41,6 @@ npm start
 yarn start
 ```
 
-Example form component:
-
-```jsx
-import React from "react";
-import { useForm } from "react-hook-form";
-
-export default function ContactForm() {
-    const { register, handleSubmit, formState: { errors } } = useForm();
-    const onSubmit = data => console.log(data);
-
-    return (
-        <form onSubmit={handleSubmit(onSubmit)}>
-            <label>
-                Name
-                <input {...register("name", { required: "Name is required" })} />
-            </label>
-            {errors.name && <span>{errors.name.message}</span>}
-
-            <label>
-                Email
-                <input
-                    {...register("email", {
-                        required: "Email is required",
-                        pattern: { value: /^\S+@\S+$/i, message: "Invalid email" }
-                    })}
-                />
-            </label>
-            {errors.email && <span>{errors.email.message}</span>}
-
-            <button type="submit">Send</button>
-        </form>
-    );
-}
-```
-
 ## Testing
 
 Add tests as needed. Example:
