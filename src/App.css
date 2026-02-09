@@ -1,0 +1,211 @@
+/* src/App.css
+  Modern form styles for RegisterForm
+*/
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
+
+:root{
+  --bg: #0f1724;
+  --surface: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+  --card: rgba(255,255,255,0.03);
+  --glass: rgba(255,255,255,0.04);
+  --primary: #7c5cff;
+  --primary-2: #5ad0ff;
+  --accent: #7ce3b9;
+  --danger: #ff6b6b;
+  --muted: rgba(255,255,255,0.14);
+  --text: #e6eef8;
+  --radius: 12px;
+  --shadow: 0 6px 30px rgba(2,6,23,0.6);
+  font-synthesis: none;
+}
+
+* { box-sizing: border-box; -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale; }
+
+html,body,#root {
+  height: 100%;
+  margin: 0;
+  background: radial-gradient(1200px 600px at 10% 10%, rgba(124,92,255,0.12), transparent),
+          radial-gradient(900px 500px at 90% 90%, rgba(90,208,255,0.08), transparent),
+          var(--bg);
+  font-family: 'Inter', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  color: var(--text);
+}
+
+/* Center the form */
+.form {
+  width: 420px;
+  max-width: calc(100% - 40px);
+  margin: 6vh auto;
+  padding: 28px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  border: 1px solid rgba(255,255,255,0.03);
+  backdrop-filter: blur(6px) saturate(120%);
+}
+
+/* Success banner */
+.success {
+  background: linear-gradient(90deg, rgba(124,92,255,0.12), rgba(90,208,255,0.08));
+  color: var(--accent);
+  padding: 10px 12px;
+  border-radius: 10px;
+  margin-bottom: 14px;
+  font-weight: 600;
+  font-size: 14px;
+  text-align: center;
+  border: 1px solid rgba(124,92,255,0.08);
+}
+
+/* Field layout */
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.field label {
+  font-size: 13px;
+  color: rgba(230,238,248,0.9);
+  font-weight: 600;
+  letter-spacing: 0.1px;
+}
+
+/* Inputs */
+.field input[type="text"],
+.field input[type="password"],
+.field input[type="email"],
+.field input[type="tel"],
+.field input:not(.checkbox) {
+  width: 100%;
+  padding: 12px 14px;
+  background: rgba(255,255,255,0.02);
+  border: 1px solid rgba(255,255,255,0.06);
+  color: var(--text);
+  border-radius: 10px;
+  font-size: 14px;
+  transition: box-shadow .18s ease, border-color .18s ease, transform .08s ease;
+  outline: none;
+  appearance: none;
+}
+
+.field input:not(.checkbox)::placeholder {
+  color: rgba(230,238,248,0.35);
+}
+
+/* Focus state */
+.field input:not(.checkbox):focus {
+  border-color: rgba(124,92,255,0.9);
+  box-shadow: 0 6px 18px rgba(124,92,255,0.09);
+  transform: translateY(-1px);
+}
+
+/* Help row */
+.helpRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+.row.small {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: rgba(230,238,248,0.8);
+  font-weight: 500;
+  font-size: 13px;
+}
+
+/* Modern checkbox (uses accent-color where supported) */
+.checkbox {
+  width: 18px;
+  height: 18px;
+  accent-color: var(--primary);
+  margin: 0;
+  cursor: pointer;
+}
+
+/* Small muted text */
+.small {
+  font-size: 12px;
+  color: rgba(230,238,248,0.55);
+}
+
+/* Errors and terms */
+.error {
+  margin-top: 8px;
+  font-size: 13px;
+  color: var(--danger);
+  background: rgba(255,107,107,0.04);
+  padding: 8px 10px;
+  border-radius: 8px;
+  border: 1px solid rgba(255,107,107,0.08);
+}
+
+.terms {
+  margin-top: 8px;
+  font-size: 13px;
+  color: rgba(230,238,248,0.7);
+}
+
+/* Actions (buttons) */
+.actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 8px;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+/* Primary button */
+button.primary {
+  padding: 10px 16px;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  font-weight: 700;
+  color: white;
+  background: linear-gradient(90deg, var(--primary), var(--primary-2));
+  box-shadow: 0 8px 22px rgba(92,60,230,0.18);
+  transition: transform .12s ease, box-shadow .12s ease, opacity .12s ease;
+}
+
+button.primary:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+button.primary:hover:not(:disabled) {
+  transform: translateY(-3px);
+  box-shadow: 0 14px 36px rgba(92,60,230,0.22);
+}
+
+/* Reset/ghost button */
+button.reset {
+  padding: 10px 14px;
+  border-radius: 10px;
+  border: 1px solid rgba(255,255,255,0.06);
+  background: transparent;
+  color: rgba(230,238,248,0.85);
+  font-weight: 600;
+  cursor: pointer;
+  transition: background .12s ease, transform .08s ease;
+}
+
+button.reset:hover {
+  background: rgba(255,255,255,0.02);
+  transform: translateY(-2px);
+}
+
+/* Responsive tweaks */
+@media (max-width: 480px) {
+  .form { margin: 4vh 12px; padding: 18px; }
+  .actions { flex-direction: column-reverse; gap: 8px; }
+  button.primary, button.reset { width: 100%; }
+}

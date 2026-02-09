@@ -1,17 +1,11 @@
-// FullName
-// Email
-// Password
-// ConfirmPassword
-// TermsAndCondition
-
-import { yupResolver } from "@hookform/resolvers/yup/src/yup.js";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
 import registerSchema from "../validation/registerSchema";
 
 export default function RegisterForm() {
   const [showPassword, setShowPassword] = useState(false);
-  const [success, setSuccess] = useState("");
+  const [success, setSuccess] = useState(false);
 
   const {
     register,
@@ -23,32 +17,28 @@ export default function RegisterForm() {
     mode: "onTouched",
   });
 
-  function onSubmit(data) {
-    console.log("Register Submit:", {
-      fullName: data.fullName,
-      email: data.email,
-      password: data.password,
-    });
-
-    setSuccess("Registration Successful!");
-  }
-
-  function handleReset() {
+  const onSubmit = (data) => {
+    console.log("Registration Data:", data);
+    setSuccess(true);
     reset();
     setShowPassword(false);
-    setSuccess("");
-  }
+  };
 
   return (
     <form className="form" onSubmit={handleSubmit(onSubmit)} noValidate>
-      {success && <div className="success">{success}</div>}
+      {success && (
+        <div className="success">
+          Registration Successful!
+        </div>
+      )}
+
+      {/* Full Name */}
       <div className="field">
         <label htmlFor="fullName">Full Name</label>
         <input
-          type="text"
           id="fullName"
-          name="fullName"
-          placeholder="Enter your full name..."
+          type="text"
+          placeholder="Enter your full name"
           {...register("fullName")}
           autoComplete="name"
         />
@@ -57,54 +47,58 @@ export default function RegisterForm() {
         )}
       </div>
 
+      {/* Email */}
       <div className="field">
         <label htmlFor="email">Email</label>
         <input
-          type="text"
           id="email"
-          name="email"
+          type="email"
           placeholder="name@example.com"
           {...register("email")}
           autoComplete="email"
         />
-        {errors.email && <div className="error">{errors.email.message}</div>}
+        {errors.email && (
+          <div className="error">{errors.email.message}</div>
+        )}
       </div>
 
+      {/* Password */}
       <div className="field">
         <label htmlFor="password">Password</label>
         <input
-          type="text"
           id="password"
-          name="password"
-          placeholder="name@example.com"
+          type={showPassword ? "text" : "password"}
+          placeholder="••••••••"
           {...register("password")}
           autoComplete="new-password"
         />
+
         <div className="helpRow">
-          <label className="row small" style={{ cursor: "pointer" }}>
+          <label className="row small">
             <input
+            className="checkbox"
               type="checkbox"
-              className="checkbox"
               checked={showPassword}
               onChange={(e) => setShowPassword(e.target.checked)}
             />
             Show Password
           </label>
-          <span className="small">Min 8 characters</span>
+          <span className="small">Minimum 8 characters</span>
         </div>
+
         {errors.password && (
           <div className="error">{errors.password.message}</div>
         )}
       </div>
 
+      {/* Confirm Password */}
       <div className="field">
-        <label htmlFor="confirm">Confirm Password</label>
+        <label htmlFor="confirmPassword">Confirm Password</label>
         <input
-          id="confirm"
-          name="confirmPassword"
+          id="confirmPassword"
           type={showPassword ? "text" : "password"}
           placeholder="••••••••"
-          {...register("confirmedPassword")}
+          {...register("confirmPassword")}
           autoComplete="new-password"
         />
         {errors.confirmPassword && (
@@ -112,25 +106,42 @@ export default function RegisterForm() {
         )}
       </div>
 
+      {/* Terms */}
       <div className="field">
-        <label htmlFor="terms">Terms & Conditions</label>
-        <input
-          type="checkbox"
+        <label className="row small">
+          <input
           className="checkbox"
-        //   checked={""}
-          onChange={(e) => (e.target.checked)}
-        />
-        {errors.confirmPassword && (
-          <div className="terms">{errors.terms.message}</div>
+            type="checkbox"
+            {...register("terms")}
+          />
+          Accept Terms & Conditions
+        </label>
+
+        {errors.terms && (
+          <div className="error">{errors.terms.message}</div>
         )}
       </div>
 
+      {/* Actions */}
       <div className="actions">
-        <button className="primary" type="submit" disabled={!isValid}>
-            Register
+        <button
+          className="primary"
+          type="submit"
+          disabled={!isValid || isSubmitting}
+        >
+          {isSubmitting ? "Submitting..." : "Register"}
         </button>
-        <button className="reset" type="button" onClick={handleReset}>
-            Reset
+
+        <button
+          className="reset"
+          type="button"
+          onClick={() => {
+            reset();
+            setShowPassword(false);
+            setSuccess(false);
+          }}
+        >
+          Reset
         </button>
       </div>
     </form>
