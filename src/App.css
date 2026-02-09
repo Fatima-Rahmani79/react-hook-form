@@ -1,7 +1,3 @@
-/* src/App.css
-  Modern form styles for RegisterForm
-*/
-
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
 
 :root{
@@ -30,6 +26,11 @@ html,body,#root {
           var(--bg);
   font-family: 'Inter', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
   color: var(--text);
+}
+
+.title {
+  text-align: center;
+  padding-top: 4rem;
 }
 
 /* Center the form */

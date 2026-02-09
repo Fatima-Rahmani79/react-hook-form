@@ -6,6 +6,7 @@ function App() {
   return (
     <>
       <div className="form-container">
+        <h2 className="title">Registerition Form</h2>
         <RegisterForm/>
       </div>
     </>
