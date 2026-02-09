@@ -7,6 +7,7 @@
 import { yupResolver } from "@hookform/resolvers/yup/src/yup.js";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
+import registerSchema from "../validation/registerSchema";
 
 export default function RegisterForm() {
   const [showPassword, setShowPassword] = useState(false);
@@ -40,6 +41,7 @@ export default function RegisterForm() {
 
   return (
     <form className="form" onSubmit={handleSubmit(onSubmit)} noValidate>
+      {success && <div className="success">{success}</div>}
       <div className="field">
         <label htmlFor="fullName">Full Name</label>
         <input
@@ -115,7 +117,7 @@ export default function RegisterForm() {
         <input
           type="checkbox"
           className="checkbox"
-        //   checked={}
+        //   checked={""}
           onChange={(e) => (e.target.checked)}
         />
         {errors.confirmPassword && (
@@ -124,7 +126,7 @@ export default function RegisterForm() {
       </div>
 
       <div className="actions">
-        <button className="primary" type="submit" disabled={!isValid || isSubmitting}>
+        <button className="primary" type="submit" disabled={!isValid}>
             Register
         </button>
         <button className="reset" type="button" onClick={handleReset}>
